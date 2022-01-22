@@ -1,0 +1,83 @@
+
+
+<div class="app-container w-100 d-table" style="height:100vh">
+    <div class="container h-80 d-table-cell align-middle">
+        <div class="card login-card m-auto">
+            <h4 class="card-header">Register</h4>
+            <div class="card-body">
+                <form #myForm="ngForm" appIdentityRevealed (ngSubmit)="onSubmitform()">
+                    <div class="form-group">
+                        <label for="name">Username</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Username"
+                            maxlength="12" pattern="[a-zA-Z_|0-9 ]*" [(ngModel)]="txtname" #name="ngModel" required>
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                            <div *ngIf="name.errors?.['required']">
+                                Please input Username
+                            </div>
+                            <div *ngIf="name.errors?.['pattern']">
+                                Please input A-Z,a-z,0-9,_
+                            </div>
+                        </div>
+                        <label for="name">Password</label>
+                        <input type="password" id="password" name="password" class="form-control"
+                            placeholder="Password" required minlength="6" pattern="^((?![a|A][b|B][c|C][d|D])(?!([1][2][3][4]))(?!(@|_|=)).)*$" [(ngModel)]="txtpassword"
+                            #pass="ngModel">
+                        <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="alert">
+                            <div *ngIf="pass.errors?.['required']">
+                                Please input Password
+                            </div>
+                            <div *ngIf="pass.errors?.['minlength']">
+                                Name must be at least 6 characters long.
+                            </div>
+                            <div *ngIf="pass.errors?.['pattern']">
+                                Password must contain at least 6 characters, including UPPER/lowercase and numbers
+                            </div>
+                        </div>
+                        <label for="name">Confirm Password</label>
+                        <input type="password" id="Cpassword" name="Cpassword" class="form-control"
+                            placeholder="Confirm Password" required minlength="6" pattern="^((?![a|A][b|B][c|C][d|D])(?!([1][2][3][4]))(?!(@|_|=)).)*$" [(ngModel)]="txtCpassword"
+                            #Cpass="ngModel">
+                        <div *ngIf="Cpass.invalid && (Cpass.dirty || pass.touched)" class="alert">
+                            <div *ngIf="Cpass.errors?.['required']">
+                                Please input Password
+                            </div>
+                            <div *ngIf="Cpass.errors?.['minlength']">
+                                Name must be at least 6 characters long.
+                            </div>
+                            <div *ngIf="Cpass.errors?.['pattern']">
+                                Password must contain at least 6 characters, including UPPER/lowercase and numbers
+                            </div>
+         
+                        </div>
+                        <div *ngIf="!!txtpassword && !!txtCpassword && txtpassword != txtCpassword">
+                                asas
+                        </div>
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="fname" class="form-control" placeholder="First Name"
+                            [(ngModel)]="txtfname" #fname="ngModel" [ngModelOptions]="{standalone: true}">
+
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lname" class="form-control" placeholder="Last name"
+                            [(ngModel)]="txtlname" #lname="ngModel" [ngModelOptions]="{standalone: true}">
+
+                        <div class="form-group">
+                            <label for="file">File</label>
+                            <input id="file" type="file" class="form-control" [(ngModel)]="txtfile" #file="ngModel"
+                                (change)="onFileChange($event)">
+                            <div *ngIf="file.touched && file.invalid" class="alert alert-danger">
+                                <div *ngIf="file.errors?.['required']">File is required.</div>
+                            </div>
+                        </div>
+                        <img [src]="imageSrc" *ngIf="imageSrc" style="width:200px">
+                    </div>
+
+                    <button class="btn btn-primary" [disabled]="name.invalid || pass.invalid">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Save
+                    </button>
+                    <a class="btn btn-light" (click)="OnBtnBackClick()">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<div class="app-container w-100 d-table" style="height:100vh" *ngIf="!IsLoginSuccess">
+    <div class="container h-80 d-table-cell align-middle">
+        <div class="card login-card m-auto">
+            <h4 class="card-header">Login</h4>
+            <div class="card-body">
+                <form #heroForm="ngForm" appIdentityRevealed (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="name" name="name" class="form-control" required minlength="4"
+                            placeholder="Username" maxlength="12" pattern="[a-zA-Z_|0-9 ]*" [(ngModel)]="txtname"
+                            #name="ngModel">
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
+                            <div *ngIf="name.errors?.['required']">
+                                Username is required
+                            </div>
+                            <div *ngIf="name.errors?.['minlength']">
+                                Name must be at least 4 characters long.
+                            </div>
+                            <div *ngIf="name.errors?.['pattern']">
+                                Please input A-Z,a-z,0-9,_
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                            required minlength="6" pattern="" [(ngModel)]="txtpassword" #pass="ngModel">
+                        <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="invalid-feedback">
+                            <div *ngIf="pass.errors?.['required']">
+                                Please input Password
+                            </div>
+                            <div *ngIf="pass.errors?.['minlength']">
+                                Name must be at least 6 characters long.
+                            </div>
+                            <div *ngIf="pass.errors?.['pattern']">
+                                Please input
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button  [disabled]="name.invalid || pass.invalid" class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Login
+                        </button>
+                        <a class="btn btn-link" (click)="OnBtnSignupClick()">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="app-container w-100 d-table" style="height:100vh" *ngIf="IsLoginSuccess">
+    <div class="container h-80 d-table-cell align-middle">
+        <div class="card login-card m-auto">
+            <h4 class="card-header">Edit</h4>
+            <div class="card-body">
+                <form #myForm="ngForm" appIdentityRevealed (ngSubmit)="onSubmitform()">
+                    <div class="form-group">
+                        <label for="name">Username</label>
+                        <input type="text" id="name" name="name" class="form-control" 
+                        placeholder="Username" required maxlength="12" pattern="[a-zA-Z_|0-9 ]*" [(ngModel)]="txtname" #name="ngModel" [ngModelOptions]="{standalone: true}">
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                            <div *ngIf="name.errors?.['required']">
+                                Please input Username
+                            </div>
+                            <div *ngIf="name.errors?.['pattern']">
+                                Please input A-Z,a-z,0-9,_
+                            </div>
+                        </div>
+                        <label for="name">Password</label>
+                        <input type="password" id="password" name="password" class="form-control"
+                            placeholder="Password" required minlength="6"  pattern="^((?![a|A][b|B][c|C][d|D])(?!([1][2][3][4]))(?!(@|_|=)).)*$" [(ngModel)]="txtpassword"
+                            #pass="ngModel" [ngModelOptions]="{standalone: true}">
+                        <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="alert">
+                            <div *ngIf="pass.errors?.['required']">
+                                Please input Password
+                            </div>
+                            <div *ngIf="pass.errors?.['minlength']">
+                                Name must be at least 6 characters long.
+                            </div>
+                            <div *ngIf="pass.errors?.['pattern']">
+                                Please input
+                            </div>
+                        </div>
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="fname" class="form-control" placeholder="First Name"
+                            [(ngModel)]="txtfname" #fname="ngModel" [ngModelOptions]="{standalone: true}">
+
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lname" class="form-control" placeholder="Last name"
+                            [(ngModel)]="txtlname" #lname="ngModel" [ngModelOptions]="{standalone: true}">
+
+                        <div class="form-group">
+                            <label for="file">File</label>
+                            <input id="file" type="file" class="form-control" [(ngModel)]="txtfile" #file="ngModel"
+                                (change)="onFileChange($event)" [ngModelOptions]="{standalone: true}">
+                            <div *ngIf="file.touched && file.invalid" class="alert alert-danger">
+                                <div *ngIf="file.errors?.['required']">File is required.</div>
+                            </div>
+                        </div>
+                        <img [src]="imageSrc" *ngIf="imageSrc" style="width:200px">
+                    </div>
+
+                    <button [disabled]="loading" class="btn btn-primary"  [disabled]="name.invalid || pass.invalid" (click)="onSubmitform()">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

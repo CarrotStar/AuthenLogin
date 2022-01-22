@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.1.1
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: Jan 21, 2022 at 10:41 PM
+- Server version: 10.4.21-MariaDB
+- PHP Version: 8.0.11
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="authendb" collation="utf8mb4_general_ci" charset="utf8mb4">
+            <pma:table name="history_users">
+                CREATE TABLE `history_users` (
+                  `Id` int(11) NOT NULL AUTO_INCREMENT,
+                  `User_Id` int(11) NOT NULL,
+                  `FirstName` varchar(50) NOT NULL,
+                  `LastName` varchar(50) NOT NULL,
+                  `UserName` varchar(50) NOT NULL,
+                  `Password` varchar(255) NOT NULL,
+                  `Profileimg` varchar(255) NOT NULL,
+                  `UpdateDate` datetime NOT NULL,
+                  `Salt` varchar(255) NOT NULL,
+                  PRIMARY KEY (`Id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            </pma:table>
+            <pma:table name="users">
+                CREATE TABLE `users` (
+                  `User_Id` int(11) NOT NULL AUTO_INCREMENT,
+                  `FirstName` varchar(50) NOT NULL,
+                  `LastName` varchar(50) NOT NULL,
+                  `UserName` varchar(59) NOT NULL,
+                  `Password` varchar(255) NOT NULL,
+                  `Profileimg` mediumtext NOT NULL,
+                  `CreateDate` datetime NOT NULL,
+                  `UpdateDate` datetime NOT NULL,
+                  `EditCount` int(11) NOT NULL,
+                  `Salt` varchar(255) NOT NULL,
+                  PRIMARY KEY (`User_Id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'authendb'
+    -->
+    <database name="authendb">
+        <!-- Table history_users -->
+        <!-- Table users -->
+    </database>
+</pma_xml_export>
